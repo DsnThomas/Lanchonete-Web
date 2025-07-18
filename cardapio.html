@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço Lanches</title>
+    <link rel="stylesheet" href="cardapio-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <i class="fas fa-hamburger"></i>
+            <h1>Espaço Lanches</h1>
+        </div>
+        <div class="user-actions">
+            <button id="myOrdersBtn" class="header-button">
+                <i class="fas fa-receipt"></i>
+                <span class="header-button-text">Meus Pedidos</span>
+            </button>
+            <button id="logoutBtn" class="header-button secondary">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="header-button-text">Sair</span>
+            </button>       
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <h2>O Lanche que Mata sua Fome</h2>
+            <p>Feito com carinho e com os melhores ingredientes. Peça já o seu!</p>
+            <a href="#navbar-categorias" class="btn-cta">Ver Cardápio</a>
+        </div>
+    </section>
+
+    <nav id="navbar-categorias">
+        <ul>
+            </ul>
+    </nav>
+
+    <main>
+        <section id="cardapio">
+            </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Espaço Lanches. Todos os direitos reservados.</p>
+    </footer>
+    
+    <a href="#" id="carrinho-flutuante" aria-label="Finalizar Compra" class="carrinho-vazio-flutuante">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="contador-carrinho">0</span>
+    </a>
+
+    <div class="modal-overlay hidden" id="successModal">
+        <div class="modal-content text-center">
+            <span class="modal-close" id="successModalClose">&times;</span>
+            <i class="fas fa-check-circle success-icon"></i>
+            <h2>Pedido Recebido!</h2>
+            <p>Seu pedido foi confirmado com sucesso. Apresente o QR Code abaixo no balcão para retirada.</p>
+            <p><strong>Seu Pedido: <span id="orderNumber"></span></strong></p>
+            <div class="qrcode-container" id="qrcode"></div>
+        </div>
+    </div>
+    <div class="modal-overlay hidden" id="myOrdersModal">
+        <div class="modal-content">
+            <span class="modal-close" id="myOrdersModalClose">&times;</span>
+            <h3>Meus Pedidos</h3>
+
+            <div class="order-tabs">
+                <button class="tab-button active" data-target="inProgressOrdersContainer">Em Andamento</button>
+                <button class="tab-button" data-target="completedOrdersContainer">Histórico</button>
+            </div>
+
+            <div id="inProgressOrdersContainer" class="order-tab-content active">
+                </div>
+            <div id="completedOrdersContainer" class="order-tab-content">
+                </div>
+
+            <p id="noUserOrdersMessage" class="hidden"></p>
+        </div>
+    </div>
+    <div class="modal-overlay hidden" id="checkoutModal">
+        <div class="modal-content">
+            <span class="modal-close" id="checkoutModalClose">&times;</span>
+            <div class="checkout-header"><h3>Resumo do Pedido</h3>
+                <a href="#" id="clearCartBtn" class="clear-cart-link">Limpar Carrinho</a>
+            </div>
+            <div id="checkoutOrderSummary" class="order-summary-list"></div>
+            <div class="order-total-container">
+                <strong>Total:</strong>
+                <strong id="checkoutOrderTotal">R$ 0,00</strong>
+            </div>
+            <div class="payment-options">
+                <h4>Escolha a forma de pagamento:</h4>
+                <button id="payOnPickupBtn" class="payment-button">Pagar na Retirada</button>
+                <button id="payOnlineBtn" class="payment-button payment-button-secondary">Pagar Online (Pix/Cartão)</button>
+            </div>
+        </div>
+    </div>
+
+<div class="modal-overlay hidden" id="paymentModal">
+    <div class="modal-content">
+        <h3>Finalizar Pagamento</h3>
+        
+        <div class="payment-interface">
+            <div class="payment-tabs">
+                <button class="tab-button active" data-target="card-form"><i class="fas fa-credit-card"></i> Cartão de Crédito</button>
+                <button class="tab-button" data-target="pix-form"><i class="fas fa-qrcode"></i> Pix</button>
+            </div>
+
+            <div class="tab-content active" id="card-form">
+                <div class="input-group">
+                    <label>Número do Cartão</label>
+                    <input type="text" placeholder="0000 0000 0000 0000" disabled>
+                </div>
+                <div class="input-group">
+                    <label>Nome no Cartão</label>
+                    <input type="text" placeholder="NOME COMPLETO" disabled>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Validade</label>
+                        <input type="text" placeholder="MM/AA" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123" disabled>
+                    </div>
+                </div>
+                <button class="payment-button" id="confirmCardPayment">
+                    <i class="fas fa-lock"></i> Pagar R$ <span id="paymentAmountCard">0,00</span>
+                </button>
+            </div>
+
+            <div class="tab-content" id="pix-form">
+                <p>Escaneie o QR Code para pagar</p>
+                <img src="https://i.imgur.com/g3yS2p8.png" alt="Exemplo de QR Code" class="pix-qr-code">
+                <button class="payment-button" id="confirmPixPayment">
+                    <i class="fas fa-check"></i> Já fiz o pagamento
+                </button>
+            </div>
+        </div>
+
+        <div id="payment-processing" class="hidden">
+            <div class="spinner"></div>
+            <p>Processando pagamento, aguarde...</p>
+        </div>
+        <div id="payment-success" class="hidden">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h4>Pagamento Aprovado!</h4>
+            <p>Seu pedido foi pago com sucesso. Finalizando...</p>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="cardapio-script.js"></script>
+</body>
+</html>

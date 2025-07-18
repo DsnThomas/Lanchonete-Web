@@ -1,0 +1,497 @@
+/* ========================================================= */
+/* --- 1. CONFIGURAÇÕES GERAIS E VARIÁVEIS DE DESIGN (PDV) --- */
+/* ========================================================= */
+:root {
+    --bg-dark: #1e1d2b;
+    --bg-card: #252836;
+    --text-primary: #ffffff;
+    --text-secondary: #c7c7c7;
+    --accent: #ffc107;
+    --accent-hover: #ffca2c;
+    --green: #28a745;
+    --red: #e63946;
+    --border-color: #3a3f51;
+    --font-headings: 'Bebas Neue', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.pdv-body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+.pdv-wrapper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* --- PAINEL DE PRODUTOS (ESQUERDA) --- */
+.pdv-products-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+}
+
+.pdv-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.back-to-admin {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.back-to-admin:hover {
+    background-color: var(--border-color);
+}
+
+.pdv-search-bar {
+    flex-grow: 1;
+    position: relative;
+}
+.pdv-search-bar i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+.pdv-search-bar input, .pdv-category-filter select {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+.pdv-search-bar input:focus, .pdv-category-filter select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.2);
+}
+.pdv-category-filter select {
+    padding-left: 15px;
+    min-width: 200px;
+}
+
+.pdv-product-grid {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding-right: 10px;
+}
+
+.pdv-product-card {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    border: 1px solid var(--border-color);
+}
+.pdv-product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-color: var(--accent);
+}
+.pdv-product-card.esgotado {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border-color);
+}
+.pdv-product-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.pdv-product-card h5 {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin: 0 0 5px;
+    font-weight: 600;
+    height: 3em; 
+    overflow: hidden;
+}
+.pdv-product-card p {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green);
+    margin: 0;
+}
+
+/* --- PAINEL DO PEDIDO (DIREITA) --- */
+.pdv-order-panel {
+    width: 380px;
+    min-width: 380px;
+    background-color: var(--bg-card);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.order-summary {
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.order-summary h3 {
+    font-family: var(--font-headings);
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin: 0 0 15px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+.empty-cart-message {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 30px;
+    font-style: italic;
+}
+.order-items-list .order-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.order-item-info { text-align: left; }
+.order-item-info span { display: block; font-weight: 600; font-size: 1rem; }
+.order-item-info small { color: var(--text-secondary); font-size: 0.9rem; }
+.order-item-controls { display: flex; align-items: center; gap: 8px; }
+.order-item-controls .qtd-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 1rem;
+    line-height: 26px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.order-item-controls .qtd-btn:hover { background-color: var(--accent); color: var(--bg-dark); }
+.order-item-controls .item-quantity { font-weight: 700; font-size: 1.1rem; min-width: 20px; text-align: center; }
+.order-item-controls .remove-item-btn { color: var(--red); border: none; font-size: 1.2rem; }
+.order-item-controls .remove-item-btn:hover { color: white; background-color: var(--red); }
+
+.order-total-section {
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-dark);
+}
+.total-line { display: flex; justify-content: space-between; font-size: 1.1rem; margin-bottom: 10px; }
+.grand-total { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+.finalize-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background-color: var(--green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.finalize-button:hover:not(:disabled) { background-color: #2ecc71; }
+.finalize-button:disabled { background-color: #555; cursor: not-allowed; opacity: 0.7; }
+
+/* Modal de Pagamento do PDV (CORRIGIDO) */
+.modal-overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1011;
+    transition: opacity 0.3s ease; /* Transição suave */
+}
+/* A classe .hidden agora controla totalmente a visibilidade */
+.modal-overlay.hidden {
+    display: none;
+}
+
+#loadPendingOrdersBtn {
+    background-color: #5cb85c; /* Um verde mais chamativo */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease; /* Adiciona uma transição suave */
+    display: flex; /* Para alinhar ícone e texto */
+    align-items: center; /* Alinha verticalmente */
+    gap: 8px; /* Espaço entre ícone e texto */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+}
+
+#loadPendingOrdersBtn:hover {
+    background-color: #4cae4c; /* Um tom de verde mais escuro no hover */
+}
+
+#loadPendingOrdersBtn i {
+    font-size: 1.2rem; /* Aumenta um pouco o tamanho do ícone */
+}
+
+#newOrderBtnPDV {
+    background-color: #f0ad4e; /* Laranja mais suave e agradável */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#newOrderBtnPDV:hover {
+    background-color: #eea236; /* Laranja um pouco mais escuro no hover */
+}
+
+#newOrderBtnPDV i {
+    font-size: 1.2rem; /* Mantém o tamanho do ícone */
+}
+
+.qr-reader-container {
+    width: 100%;
+    max-width: 450px;
+    margin: 15px auto;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    display: none; /* Começa escondido */
+    overflow: hidden;
+}
+
+/* Botão Ler QR Code (Azul) */
+#scanQrCodeBtnPDV {
+    background-color: #337ab7;
+}
+#scanQrCodeBtnPDV:hover {
+    background-color: #286090;
+}
+
+#scanQrCodeBtnPDV {
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600; /* Deixa o texto um pouco mais forte */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    width: 90%; max-width: 500px;
+    position: relative; /* Adicionado para posicionar o botão de fechar */
+}
+.modal-close {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 28px; font-weight: bold;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.modal-close:hover { color: var(--text-primary); }
+
+#paymentPdvModal .modal-content h3 { /* Estilo adicionado para consistência */
+    font-family: var(--font-headings);
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#paymentPdvModal .order-total-container { /* Estilo adicionado para consistência */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-dark);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+#paymentPdvModal .payment-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+#paymentPdvModal .payment-button {
+    padding: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#paymentPdvModal .payment-button:hover {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    border-color: var(--accent);
+}
+
+/* ========================================================= */
+/* --- 8. ESTILOS PARA O MODAL DE RECIBO E IMPRESSÃO --- */
+/* ========================================================= */
+
+#receiptModal .modal-content {
+    text-align: center;
+}
+
+#printable-receipt {
+    padding: 20px;
+    border-bottom: 2px dashed var(--border-color);
+    margin-bottom: 20px;
+}
+
+#printable-receipt h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+#printable-receipt p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+#receiptOrderId {
+    font-family: var(--font-headings);
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin: 10px 0;
+}
+
+.receipt-qrcode {
+    width: 180px;
+    height: 180px;
+    margin: 15px auto;
+    background-color: white; /* Fundo branco para o QR code */
+    padding: 10px;
+    border-radius: 8px;
+}
+.receipt-qrcode img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.receipt-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.simple-list {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.simple-list li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.simple-list li:hover {
+    background-color: #f5f5f5;
+}
+.simple-list small {
+    display: block;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* --- REGRAS DE IMPRESSÃO --- */
+@media print {
+    /* Esconde tudo na página por padrão */
+    body * {
+        visibility: hidden;
+    }
+    
+    /* Mostra APENAS a área do recibo e seus conteúdos */
+    #printable-receipt, #printable-receipt * {
+        visibility: visible;
+    }
+
+    /* Centraliza o recibo na folha de impressão */
+    #printable-receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        text-align: center;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Ajusta o QR code para impressão */
+    .receipt-qrcode {
+        margin: 20px auto;
+    }
+}

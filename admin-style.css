@@ -1,0 +1,1244 @@
+/* admin-style.css */
+
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@400;500;700&display=swap');
+
+:root {
+    /* Cores corporativas/profissionais */
+    --primary-admin-color: #1e1d2b; /* Azul escuro (quase preto) para elementos principais */
+    --secondary-admin-color: #221e11; /* Azul um pouco mais claro para fundos secundários */
+    --accent-admin-color: #3cff00; /* Verde vibrante para ações e destaques */
+    --text-dark: #333333;
+    --text-light: #ffc107; /* Cor para texto em fundos escuros */
+    --background-admin: #ffffff6b; /* Fundo geral claro */
+    --card-bg: #FFFFFF;
+    --border-admin-color: #E0E0E0;
+    --shadow-admin: rgba(0, 0, 0, 0.1);
+    --hover-effect: rgba(0, 0, 0, 0.05);
+    --font-headings: 'Bebas Neue', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--background-admin);
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: flex; /* Para o layout de sidebar e main content */
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.admin-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-admin-color);
+    color: var(--text-light);
+    padding: 20px;
+    display: block;
+    flex-direction: column;
+    justify-content: space-between; /* Para empurrar o footer para baixo */
+    box-shadow: 2px 0 10px var(--shadow-admin);
+}
+
+.sidebar-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-logo i {
+    font-size: 3rem;
+    color: var(--accent-admin-color);
+    margin-bottom: 10px;
+}
+
+.sidebar-logo h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.sidebar-nav a i {
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav li.active a {
+    background-color: var(--secondary-admin-color);
+    color: var(--accent-admin-color);
+}
+
+.sidebar-footer {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.logout-button {
+    background-color: #E74C3C; /* Vermelho para logout */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-button i {
+    margin-right: 8px;
+}
+
+.logout-button:hover {
+    background-color: #C0392B;
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: var(--background-admin);
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-admin-color);
+}
+
+.main-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-admin-color);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: var(--secondary-admin-color);
+}
+
+.user-info i {
+    margin-right: 8px;
+    font-size: 1.5rem;
+    color: var(--accent-admin-color);
+}
+
+/* Content Sections */
+.content-section {
+    display: none; /* Esconde todas as seções por padrão */
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.content-section.active {
+    display: block; /* Mostra a seção ativa */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card Grid for Dashboard */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-admin);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: var(--secondary-admin-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.card-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-admin-color);
+    margin-bottom: 10px;
+}
+
+.card-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 3rem;
+    color: rgba(0, 0, 0, 0.08); /* Ícone de fundo sutil */
+    z-index: 0;
+}
+
+.recent-activity {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-admin);
+    margin-top: 30px;
+}
+
+.recent-activity h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    color: var(--primary-admin-color);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-admin-color);
+    padding-bottom: 10px;
+}
+
+.recent-activity ul {
+    list-style: none;
+}
+
+.recent-activity li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-admin-color);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.recent-activity li:last-child {
+    border-bottom: none;
+}
+
+.activity-time {
+    font-weight: 600;
+    color: var(--secondary-admin-color);
+    margin-right: 15px;
+    min-width: 60px; /* Garante alinhamento */
+}
+
+
+/* Forms in Admin Panel */
+.form-container {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-admin);
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.form-container h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary-admin-color);
+    margin-bottom: 20px;
+}
+
+.admin-form .input-group {
+    margin-bottom: 18px;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--secondary-admin-color);
+    font-size: 0.95rem;
+}
+
+/* Regra de estilo para todos os inputs, textareas e selects dentro do formulário admin */
+.admin-form input[type="text"],
+.admin-form input[type="password"],
+.admin-form input[type="email"],
+.admin-form input[type="number"], /* Adicionado para o salário */
+.admin-form input[type="date"],   /* Adicionado para as datas */
+.admin-form textarea,             /* Adicionado para o endereço */
+.admin-form select {              /* Adicionado para os selects (Função, Turno, Estado Civil) */
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-admin-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-dark);
+    background-color: var(--background-admin);
+    transition: all 0.3s ease;
+}
+
+/* Estilo para o estado de foco dos inputs, textareas e selects */
+.admin-form input[type="text"]:focus,
+.admin-form input[type="password"]:focus,
+.admin-form input[type="email"]:focus,
+.admin-form input[type="number"]:focus,
+.admin-form input[type="date"]:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+    border-color: var(--accent-admin-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.2); /* Sombra de foco verde */
+    background-color: white;
+}
+
+.submit-button {
+    background-color: var(--accent-admin-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 15px;
+}
+
+.submit-button:hover {
+    background-color: #2ECC71; /* Um verde um pouco mais claro */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+}
+
+
+/* Tables for Data Display */
+.table-container {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-admin);
+    margin-top: 25px;
+    overflow-x: auto; /* Para tabelas responsivas */
+}
+
+.table-container h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary-admin-color);
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-admin-color);
+}
+
+th {
+    background-color: var(--secondary-admin-color);
+    color: var(--text-light);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+    background-color: #F8F8F8; /* Linhas zebradas */
+}
+
+tr:hover {
+    background-color: var(--hover-effect);
+}
+
+.action-edit, .action-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.action-edit {
+    color: #3498DB; /* Azul para editar */
+}
+.action-edit:hover {
+    color: #2980B9;
+}
+
+.action-delete {
+    color: #E74C3C; /* Vermelho para deletar */
+}
+.action-delete:hover {
+    color: #C0392B;
+}
+
+.stock-display-container {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-admin);
+    margin-top: 25px;
+}
+
+.stock-display-container h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary-admin-color);
+    margin-bottom: 20px;
+}
+
+/* Reutilizando a classe card-grid que já existe no dashboard */
+#stockItemsGrid.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajuste o minmax conforme preferir */
+    gap: 20px; /* Espaço entre os cards */
+    padding-top: 10px; /* Espaço acima dos cards */
+}
+
+/* Estilos para cada card de item de estoque */
+.stock-item-card {
+    background-color: var(--background-admin); /* Cor de fundo um pouco diferente para o card interno */
+    border: 1px solid var(--border-admin-color);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative; /* Para posicionar ações */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stock-item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stock-item-card img {
+    width: 100%;
+    max-height: 150px; /* Altura máxima para as imagens */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-admin-color);
+}
+
+.stock-item-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: var(--secondary-admin-color);
+    margin-bottom: 5px;
+}
+
+.stock-item-card p {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 3px;
+}
+
+.stock-item-card .category-tag {
+    background-color: var(--primary-admin-color); /* Um tom mais suave do amarelo */
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: inline-block; /* Para o padding funcionar */
+}
+
+.stock-item-card .stock-details {
+    margin-top: 10px;
+    width: 100%;
+    border-top: 1px dashed var(--border-admin-color);
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap; /* Permite que os detalhes se quebrem em várias linhas */
+    justify-content: space-around; /* Distribui os itens */
+    font-size: 0.85rem;
+}
+
+.stock-item-card .detail-item {
+    flex: 1 1 45%; /* Ocupa cerca de metade da largura em telas maiores */
+    padding: 5px 0;
+    text-align: left;
+}
+
+.stock-item-card .detail-label {
+    font-weight: 600;
+    color: var(--secondary-admin-color);
+    margin-right: 5px;
+}
+
+/* Botões de ação dentro do card */
+.stock-item-card .card-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.stock-item-card .card-actions .action-edit,
+.stock-item-card .card-actions .action-delete {
+    font-size: 1rem;
+    padding: 6px;
+    border-radius: 50%; /* Botões redondos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.stock-item-card .card-actions .action-edit:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+.stock-item-card .card-actions .action-delete:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Estilo para a pré-visualização da imagem nos formulários */
+.image-preview {
+    display: block; /* Para que margin funcione corretamente */
+    max-width: 200px; /* Largura máxima */
+    max-height: 150px; /* Altura máxima */
+    margin-top: 10px;
+    border: 1px solid var(--border-admin-color);
+    border-radius: 4px;
+    object-fit: contain; /* Para a imagem caber sem distorcer */
+}
+
+.image-preview.hidden {
+    display: none;
+}
+
+/* Estilos para o grupo de checkbox (para alinhar o label com o checkbox) */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre o checkbox e o label */
+}
+.checkbox-group input[type="checkbox"] {
+    width: auto; /* Reseta o width: 100% dos inputs gerais */
+    margin: 0;
+}
+.checkbox-label {
+    margin-bottom: 0; /* Reseta o margin-bottom dos labels gerais */
+    font-weight: normal; /* Pode ajustar conforme preferir */
+}
+
+
+/* --- NOVOS ESTILOS PARA CARDS DE PRODUTOS DO CARDÁPIO --- */
+/* #menuProductsGrid.card-grid já usa o estilo de .card-grid existente */
+
+.menu-product-card {
+    background-color: #fff; /* Fundo branco para o card */
+    border: 1px solid var(--border-admin-color);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; Removido para texto alinhar à esquerda por padrão */
+    text-align: left; /* Texto alinhado à esquerda */
+    position: relative; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-height: 320px; /* Altura mínima para consistência */
+    justify-content: space-between; /* Para empurrar ações/status para baixo se necessário */
+}
+
+.menu-product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Estilo para produto inativo - pode ajustar conforme preferir */
+.menu-product-card.inactive-menu-product {
+    opacity: 0.65;
+    border-left: 5px solid #7f8c8d; /* Cinza para inativo */
+}
+.menu-product-card.inactive-menu-product:hover {
+    opacity: 1; /* Mostra normal no hover */
+}
+
+
+.menu-product-card-img {
+    width: 100%;
+    height: 150px; /* Altura fixa para a imagem */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-admin-color);
+}
+
+.menu-product-card h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    color: var(--primary-admin-color); /* Cor primária para o nome do produto */
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.menu-product-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-admin-color); /* Cor de destaque para o preço */
+    margin-bottom: 8px;
+}
+
+.menu-product-stock-item {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.menu-product-description {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    flex-grow: 1; /* Permite que a descrição ocupe espaço disponível */
+    line-height: 1.4;
+}
+
+.menu-product-status {
+    margin-top: auto; /* Empurra para o final do card se houver espaço */
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-admin-color);
+    width: 100%;
+    text-align: right; /* Alinha o status à direita */
+}
+
+.status-tag { /* Estilo base para tags de status, já existe, pode ajustar */
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-flex; /* Para alinhar ícone e texto */
+    align-items: center;
+    gap: 5px;
+}
+
+.status-active-tag { /* Para a tag "Ativo" no card de produto */
+    background-color: var(--accent-admin-color); /* Verde */
+    color: white;
+}
+
+.status-inactive-tag { /* Para a tag "Inativo" no card de produto */
+    background-color: #E74C3C; /* Vermelho */
+    color: white;
+}
+
+/* Ações no card de produto do cardápio */
+.menu-product-card .card-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column; /* Empilha os botões verticalmente */
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fundo leve para melhor visibilidade */
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.menu-product-card .card-actions button {
+    font-size: 0.9rem; /* Tamanho do ícone/texto */
+    padding: 5px; /* Padding menor */
+    border-radius: 4px; 
+    width: auto; /* Para não ocupar toda a largura */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px; /* Largura mínima */
+}
+.menu-product-card .card-actions button i {
+    margin-right: 0; /* Remove margem se só tiver ícone */
+}
+
+.menu-product-card .action-toggle-active {
+    color: #34495e; /* Cor neutra para o botão de toggle */
+}
+.menu-product-card .action-toggle-active:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* Estilos para a pré-visualização de imagem na tabela (caso use tabela) */
+.table-image-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+/* O fundo escuro que cobre a página */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.dashboard-logo-container {
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-logo-container img {
+    max-width: 80%;
+    max-height: 400px; /* Define uma altura máxima para não ficar grande demais */
+    height: auto;
+    border-radius: 8px; /* Cantos arredondados na imagem também */
+}
+
+/* Classe para mostrar o modal */
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* A caixa do modal em si */
+.modal-content {
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(-30px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+/* O botão de fechar (X) no canto */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-cancel {
+    background-color: #e74c3c; /* Vermelho */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 10px; /* Espaçamento entre os botões */
+}
+
+.modal-cancel:hover {
+    background-color: #c0392b; /* Vermelho mais escuro no hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+.order-actions {
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    margin-top: 20px;
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+.qr-reader-container {
+    width: 100%;
+    max-width: 400px; /* Limita o tamanho do leitor */
+    margin: 20px auto;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o vídeo não saia dos limites */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: none; /* Inicia oculto, controlado por JS */
+}
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex; /* Usado para centralizar a janela */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Garante que fique na frente de tudo */
+        }
+        /* A janela branca (o conteúdo do modal) */
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px; /* Largura máxima da janela */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        /* O cabeçalho com título e botão de fechar */
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .modal-close-button {
+            background: none; border: none; font-size: 1.75rem; cursor: pointer;
+        }
+        /* O contêiner onde os checkboxes de permissão aparecerão */
+        #permissionsCheckboxesContainer {
+            display: grid; /* Organiza os checkboxes em colunas */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-height: 40vh; /* Altura máxima com barra de rolagem */
+            overflow-y: auto;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .permission-item { display: flex; align-items: center; }
+        .permission-item input { margin-right: 0.5rem; }
+        /* O rodapé com os botões Salvar/Cancelar */
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .cancel-button { background-color: #6c757d; }
+
+/* --- ESTILO PARA O BOTÃO DE AÇÃO FLUTUANTE (FAB) --- */
+
+.fab {
+    position: fixed; /* A propriedade mais importante: fixa o botão na tela */
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #150063; /* Cor primária do seu tema */
+    color: #fff;
+    border-radius: 50%; /* Deixa o botão redondo */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Garante que ele fique acima dos outros elementos */
+    transition: all 0.3s ease;
+}
+
+.fab:hover {
+    transform: scale(1.1); /* Efeito de crescimento ao passar o mouse */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background-color: #e07b00; /* Um tom um pouco mais escuro */
+}
+
+
+/* Primeiro, o botão do menu que só aparece no mobile */
+.mobile-menu-toggle {
+    display: none; /* Escondido por padrão em telas grandes */
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed; /* Fica por cima de tudo */
+        left: -250px; /* Começa escondida para fora da tela */
+        top: 0;
+        height: 100%;
+        z-index: 1100; /* Garante que fique acima do conteúdo */
+        transition: left 0.3s ease-in-out; /* Animação de deslizar */
+    }
+
+    /* Classe que o JavaScript vai adicionar para mostrar a sidebar */
+    .sidebar.active {
+        left: 0; /* Traz a sidebar para a tela */
+        width: 250px;
+    }
+
+    .main-content {
+        margin-left: 0; /* Conteúdo principal ocupa toda a largura */
+        width: 100%;
+    }
+
+    .mobile-menu-toggle {
+        display: block; /* Mostra o botão hambúrguer */
+    }
+
+    .main-header h1 {
+        font-size: 1.2rem; /* Diminui o título no celular */
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr; /* Deixa um card por linha */
+    }
+
+    /* Opcional: Adiciona um fundo escuro quando o menu está aberto */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1099;
+        display: none; /* Começa escondido */
+    }
+    .overlay.active {
+        display: block;
+    }
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 80px; /* Sidebar mais compacta */
+        padding: 15px 10px;
+    }
+    .sidebar-logo h2 {
+        display: none; /* Esconde o texto do logo */
+    }
+    .sidebar-nav a {
+        justify-content: center; /* Centraliza ícones */
+        padding: 12px 0;
+        margin-bottom: 5px;
+    }
+    .sidebar-nav a i {
+        margin-right: 0;
+    }
+    .sidebar-nav a span { /* Se você adicionar span para o texto do link */
+        display: none;
+    }
+    .logout-button span { /* Se você adicionar span para o texto do botão de sair */
+        display: none;
+    }
+    .logout-button i {
+        margin-right: 0;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .card-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+}
+
+/* --- Estilos para o Status na Tabela --- */
+.status {
+    font-weight: bold;
+    padding: 5px 8px;
+    border-radius: 5px;
+    text-align: center;
+}
+.status-active {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724; /* Verde escuro */
+}
+.status-inactive {
+    background-color: #f8d7da; /* Vermelho claro */
+    color: #721c24; /* Vermelho escuro */
+}
+.error-message {
+    color: #d9534f;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* --- Estilos de Impressão --- */
+@media print {
+    /* Esconde elementos não essenciais */
+    .sidebar,
+    .main-header,
+    .filter-bar,
+    .logout-button,
+    .mobile-menu-toggle,
+    .sidebar-footer {
+        display: none !important;
+    }
+
+    /* Reseta o corpo da página para impressão */
+    body {
+        background-color: #fff;
+        font-family: Arial, sans-serif; /* Fonte mais comum para impressão */
+        font-size: 10pt; /* Tamanho de fonte ideal para A4 */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Garante que o conteúdo do relatório ocupe toda a página */
+    .admin-wrapper {
+        display: block;
+    }
+
+    .main-content {
+        width: 100%;
+        margin: 0;
+        padding: 2cm; /* Adiciona margens de impressão */
+        box-sizing: border-box; /* Garante que o padding não quebre o layout */
+    }
+    
+    .content-card {
+        box-shadow: none;
+        border: none;
+        page-break-inside: avoid;
+    }
+
+    /* Remove a necessidade de rolagem */
+    .table-wrapper {
+        overflow: visible;
+        height: auto;
+    }
+
+    /* Estilização da tabela para impressão */
+    table {
+        width: 100%;
+        border-collapse: collapse; /* Bordas mais limpas */
+        -webkit-print-color-adjust: exact; /* Garante que cores de fundo sejam impressas */
+        print-color-adjust: exact;
+    }
+
+    th, td {
+       border: 1px solid #ddd; /* Bordas finas para todas as células */
+       padding: 8px 10px; /* Espaçamento interno */
+       color: #000 !important;
+       background: #fff !important;
+       text-align: left; /* Alinhamento padrão à esquerda */
+    }
+
+    thead th {
+        background-color: #f2f2f2 !important; /* Fundo cinza claro para cabeçalho */
+        font-weight: bold;
+        text-align: center; /* Centraliza o texto do cabeçalho */
+    }
+    
+    /* Evita quebra de linha em colunas específicas */
+    #productsReportTable th:nth-child(5), /* Preço Venda */
+    #productsReportTable td:nth-child(5),
+    #productsReportTable th:nth-child(6), /* Preço Custo */
+    #productsReportTable td:nth-child(6) {
+        white-space: nowrap; /* Impede a quebra de linha */
+        text-align: right; /* Alinha valores monetários à direita */
+    }
+
+    #productsReportTable th:nth-child(1), /* Código */
+    #productsReportTable td:nth-child(1),
+    #productsReportTable th:nth-child(7), /* Estoque */
+    #productsReportTable td:nth-child(7),
+    #productsReportTable th:nth-child(8), /* Ativo */
+    #productsReportTable td:nth-child(8) {
+       text-align: center; /* Centraliza colunas de valores curtos */
+    }
+
+    .status-active, .status-inactive {
+        background-color: transparent !important; /* Remove o fundo colorido do status */
+        font-weight: normal;
+    }
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* --- Título de Impressão Aprimorado --- */
+    /* Remove o título antigo */
+    body::before {
+        content: "";
+        display: none;
+    }
+
+    /* Adiciona um novo cabeçalho antes do conteúdo principal */
+    .main-content::before {
+        content: 'Relatório de Produtos\A Sistema de Gestão'; /* \A cria uma quebra de linha */
+        white-space: pre; /* Interpreta a quebra de linha */
+        display: block;
+        text-align: center;
+        font-size: 16pt;
+        font-weight: bold;
+        color: #000;
+        margin-bottom: 25px;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-header h1 {
+        font-size: 1.6rem;
+    }
+    .user-info {
+        font-size: 1rem;
+    }
+    .card-value {
+        font-size: 2rem;
+    }
+    .card h3 {
+        font-size: 1rem;
+    }
+    .recent-activity li {
+        font-size: 0.85rem;
+    }
+    .admin-form input, .submit-button {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+    }
+    th, td {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- NOVOS ESTILOS PARA STATUS DE ESTOQUE --- */
+
+/* Estilos para as tags de status */
+.status-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Espaço entre as tags */
+    justify-content: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.status-tag {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Tag específica para item VENCIDO */
+.status-tag.expired-tag {
+    background-color: #E74C3C; /* Vermelho */
+    color: white;
+}
+
+/* Tag específica para ESTOQUE BAIXO */
+.status-tag.low-stock-tag {
+    background-color: #F39C12; /* Laranja */
+    color: white;
+}
+
+/* Bordas coloridas nos cards para indicar o status */
+.stock-item-card.expired {
+    border-left: 5px solid #E74C3C; /* Borda vermelha */
+}
+
+.stock-item-card.low-stock {
+    border-left: 5px solid #F39C12; /* Borda laranja */
+}
+
+/* Se um item tiver ambos os status, a borda de vencido (mais crítica) prevalece */
+.stock-item-card.expired.low-stock {
+    border-left-color: #E74C3C;
+}

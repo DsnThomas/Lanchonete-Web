@@ -1,0 +1,200 @@
+/* ========================================================= */
+/* --- 1. CONFIGURAÇÕES GERAIS E VARIÁVEIS DE DESIGN --- */
+/* ========================================================= */
+:root {
+    --bg-dark: #1e1d2b;
+    --bg-card: #252836;
+    --text-primary: #ffffff;
+    --text-secondary: #c7c7c7;
+    --accent: #ffc107;
+    --accent-hover: #ffca2c;
+    --red-error: #e63946;
+    --font-headings: 'Bebas Neue', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+/* --- ESTILO GERAL DO CORPO (BODY) --- */
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=2072&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+
+/* --- CONTAINER PRINCIPAL DO FORMULÁRIO --- */
+.form-container {
+    background-color: var(--bg-card);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.logo h1 {
+    font-family: var(--font-headings);
+    font-size: 3rem;
+    margin: 0;
+    color: var(--accent);
+    letter-spacing: 2px;
+}
+
+/* --- ESTILO DOS FORMULÁRIOS --- */
+.auth-form h2 {
+    font-family: var(--font-headings);
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+}
+
+.form-description {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: -15px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho */
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.3);
+}
+
+.input-hint {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 5px;
+}
+
+/* --- BOTÕES --- */
+.auth-button {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.auth-button:hover {
+    background-color: var(--accent-hover);
+}
+
+/* --- SELEÇÃO DE PERFIL (ROLE) --- */
+.role-selection {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.role-button {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: transparent;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.role-button.active {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    border-color: var(--accent);
+}
+
+/* --- LINKS INFERIORES --- */
+.bottom-links, .toggle-employee-option {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 0.9em;
+}
+
+.bottom-links p, .toggle-employee-option p {
+    margin: 10px 0;
+    color: var(--text-secondary);
+}
+
+.bottom-links a, .toggle-employee-option a, .toggle-link-center a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bottom-links a:hover, .toggle-employee-option a:hover, .toggle-link-center a:hover {
+    text-decoration: underline;
+}
+
+.toggle-link-center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* --- MENSAGENS DE ERRO E UTILITÁRIOS --- */
+.error-message {
+    color: var(--red-error);
+    font-size: 0.8em;
+    display: block;
+    margin-top: 5px;
+    min-height: 1.2em; /* Evita que o layout "pule" */
+}
+
+.hidden {
+    display: none;
+}

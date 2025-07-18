@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - Lanchonete TopSabor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        /* Estilos adicionais para a página de checkout */
+        .checkout-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .checkout-coluna {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+        }
+        .checkout-coluna h2 {
+            font-family: 'Poppins', sans-serif;
+            color: #e07b00;
+            border-bottom: 2px solid #f8f0e5;
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+        #resumo-carrinho-lista {
+            list-style: none;
+            padding: 0;
+        }
+        #resumo-carrinho-lista li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 5px;
+            border-bottom: 1px solid #f1f3f5;
+            font-size: 1.1em;
+        }
+        .item-nome { font-weight: 600; }
+        .item-total { color: #28a745; font-weight: 600; }
+        
+        #total-pedido {
+            text-align: right;
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #343a40;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 3px double #ff8c00;
+        }
+        
+        .form-grupo { margin-bottom: 20px; }
+        .form-grupo label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #495057;
+        }
+        .form-grupo input,
+        .form-grupo select,
+        .form-grupo textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        
+        #enviar-pedido-whatsapp {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            background-image: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.25s ease-out;
+        }
+        #enviar-pedido-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: white; text-decoration: none; font-size: 1.2em;">&larr; Voltar</a>
+        <h1>Finalizar Pedido</h1>
+    </header>
+
+    <main class="checkout-container">
+        <section class="checkout-coluna">
+            <h2>Resumo do Pedido</h2>
+            <ul id="resumo-carrinho-lista">
+                <p>Carregando seu pedido...</p>
+            </ul>
+            <div id="total-pedido">
+                Total: R$ <span id="valor-total-final">0.00</span>
+            </div>
+        </section>
+
+        <section class="checkout-coluna">
+            <form id="form-checkout">
+                <h2>Seus Dados para Entrega</h2>
+                <div class="form-grupo">
+                    <label for="nome">Seu Nome</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-grupo">
+                    <label for="endereco">Endereço de Entrega</label>
+                    <input type="text" id="endereco" name="endereco" required placeholder="Rua, Número, Bairro...">
+                </div>
+                <div class="form-grupo">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" name="observacoes" rows="3" placeholder="Ex: Tirar a cebola, troco para R$ 50, etc."></textarea>
+                </div>
+
+                <h2>Forma de Pagamento</h2>
+                <div class="form-grupo">
+                    <select name="pagamento" id="pagamento" required>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Cartão de Débito">Cartão de Débito</option>
+                        <option value="Pix">Pix</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="enviar-pedido-whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    Enviar Pedido pelo WhatsApp
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const listaResumoEl = document.getElementById('resumo-carrinho-lista');
+            const totalFinalSpan = document.getElementById('valor-total-final');
+            const formCheckout = document.getElementById('form-checkout');
+
+            // 1. Pega os dados do carrinho que foram salvos na página anterior
+            const carrinhoJSON = localStorage.getItem('carrinhoParaCheckout');
+            
+            if (!carrinhoJSON) {
+                listaResumoEl.innerHTML = '<li>Ocorreu um erro ou seu carrinho está vazio. <a href="index.html">Voltar ao cardápio</a>.</li>';
+                return;
+            }
+
+            const carrinho = JSON.parse(carrinhoJSON);
+            let valorTotal = 0;
+            
+            // 2. Limpa a lista e mostra os itens do pedido
+            listaResumoEl.innerHTML = '';
+            carrinho.forEach(item => {
+                const subtotal = item.preco * item.quantidade;
+                valorTotal += subtotal;
+
+                const itemLi = document.createElement('li');
+                itemLi.innerHTML = `
+                    <span class="item-nome">${item.quantidade}x ${item.nome}</span>
+                    <span class="item-total">R$ ${subtotal.toFixed(2)}</span>
+                `;
+                listaResumoEl.appendChild(itemLi);
+            });
+
+            // 3. Atualiza o valor total na tela
+            totalFinalSpan.textContent = valorTotal.toFixed(2);
+
+            // 4. Monta e envia a mensagem para o WhatsApp quando o formulário for enviado
+            formCheckout.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const nome = document.getElementById('nome').value;
+                const endereco = document.getElementById('endereco').value;
+                const pagamento = document.getElementById('pagamento').value;
+                const observacoes = document.getElementById('observacoes').value;
+                
+                // Monta a mensagem final
+                let mensagem = `*Novo Pedido da Lanchonete TopSabor*\n\n`;
+                mensagem += `*Cliente:* ${nome}\n`;
+                mensagem += `*Endereço:* ${endereco}\n\n`;
+                mensagem += `*Resumo do Pedido:*\n`;
+                carrinho.forEach(item => {
+                    mensagem += ` - ${item.quantidade}x ${item.nome}\n`;
+                });
+                mensagem += `\n*Forma de Pagamento:* ${pagamento}\n`;
+                if(observacoes) {
+                    mensagem += `*Observações:* ${observacoes}\n`;
+                }
+                mensagem += `\n*TOTAL: R$ ${valorTotal.toFixed(2)}*`;
+
+                // **IMPORTANTE:** Substitua '5534999999999' pelo número de WhatsApp da sua lanchonete
+                const numeroWhatsApp = '5534999999999';
+                const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+                // Abre o link em uma nova aba
+                window.open(linkWhatsApp, '_blank');
+            });
+        });
+    </script>
+
+</body>
+</html>

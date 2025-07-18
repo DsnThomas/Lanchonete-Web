@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Produtos - Painel de Controle</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-hamburger"></i>
+                    <h2>Relatório de Produtos</h2>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item"><a href="admin.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a href="pdv.html" target="_blank"><i class="fas fa-cash-register"></i><span>Ponto de Venda</span></a></li>
+                    <li class="nav-item"><a href="pedidos.html"><i class="fas fa-receipt"></i><span>Fila de Pedidos</span></a></li>
+                    <li class="nav-item"><a href="relatorios.html"><i class="fas fa-chart-line"></i><span>Relatórios de Vendas</span></a></li>
+                    <li class="nav-item active"><a href="relatorio-produtos.html"><i class="fas fa-box-open"></i><span>Relatório de Produtos</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-button" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Sair</span></button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <h1>Relatório Completo de Produtos</h1>
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="loggedInUserName">Administrador</span>
+                </div>
+            </header>
+
+            <section class="content-section active" id="product-report">
+                <div class="content-card filter-bar">
+                    <button class="submit-button" id="printReportBtn"><i class="fas fa-print"></i> Imprimir Relatório</button>
+                </div>
+
+                <div class="content-card">
+                    <h3>Todos os Produtos do Cardápio</h3>
+                    <div class="table-wrapper">
+                        <table id="productsReportTable">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome no Cardápio</th>
+                                    <th>Categoria</th>
+                                    <th>Fornecedor</th>
+                                    <th>Preço de Venda</th>
+                                    <th>Preço de Custo</th>
+                                    <th>Estoque Atual</th>
+                                    <th>Ativo?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="8">Carregando relatório...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+
+    <script src="relatorio-produtos-script.js"></script>
+</body>
+</html>

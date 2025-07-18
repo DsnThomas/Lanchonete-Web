@@ -1,0 +1,650 @@
+/* ========================================================= */
+/* --- 1. CONFIGURAÇÕES GERAIS E NOVAS VARIÁVEIS DE DESIGN --- */
+/* ========================================================= */
+:root {
+    --bg-dark: #1e1d2b;      /* Fundo escuro principal */
+    --bg-card: #252836;         /* Fundo dos cards e cabeçalho */
+    --text-primary: #ffffff;     /* Cor do texto principal (branco) */
+    --text-secondary: #c7c7c7; /* Cor para descrições e textos de apoio */
+    --accent: #ffc107;         /* Cor de destaque principal (amarelo/mostarda) */
+    --accent-hover: #ffca2c;   /* Cor de destaque para hover */
+    --green: #28a745;           /* Verde para sucesso e preços */
+    --red: #e63946;             /* Vermelho para alertas e contadores */
+
+    /* Novas fontes importadas do Google Fonts */
+    --font-headings: 'Bebas Neue', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+/* --- ESTILO GERAL DO CORPO (BODY) --- */
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+/* =============================== */
+/* --- 2. CABEÇALHO (HEADER) --- */
+/* =============================== */
+header {
+    background-color: var(--bg-card);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--accent);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--accent);
+}
+
+header h1 {
+    font-family: var(--font-headings);
+    font-size: 2.5rem;
+    margin: 0;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-shadow: none; /* Removido o text-shadow antigo */
+}
+
+.user-actions { /* Container para os botões */
+    display: flex;
+    gap: 10px;
+}
+
+.header-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border: 1px solid var(--accent);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: none; /* O JS controla a visibilidade */
+}
+
+.header-button.secondary {
+    background-color: transparent;
+    border-color: var(--text-secondary);
+}
+
+.header-button:hover {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    border-color: var(--accent);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* ========================================================= */
+/* --- 3. SEÇÃO DE DESTAQUE (HERO) - (NOVA SEÇÃO) --- */
+/* ========================================================= */
+.hero-section {
+    height: 60vh;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=2072&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-text h2 {
+    font-family: var(--font-headings);
+    font-size: 4rem;
+    color: var(--text-primary);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    margin: 0 0 10px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.btn-cta {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    padding: 12px 30px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+}
+
+.btn-cta:hover {
+    background-color: var(--accent-hover);
+}
+
+
+/* ======================================= */
+/* --- 4. BARRA DE NAVEGAÇÃO DE CATEGORIAS --- */
+/* ======================================= */
+#navbar-categorias {
+    background-color: var(--bg-card);
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom: none; /* Removida borda antiga */
+}
+
+#navbar-categorias ul {
+    list-style: none; margin: 0; padding: 0 15px;
+    display: flex; justify-content: center; gap: 15px;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+#navbar-categorias ul::-webkit-scrollbar { display: none; }
+
+#navbar-categorias ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+#navbar-categorias ul li a:hover,
+#navbar-categorias ul li a.active-nav-link {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    transform: none; /* Resetado transform antigo */
+    box-shadow: none; /* Resetado shadow antigo */
+}
+#navbar-categorias ul li a.active-nav-link::after {
+    display: none; /* Removido o ponto laranja de baixo */
+}
+
+/* =============================================== */
+/* --- 5. SEÇÃO DO CARDÁPIO E ESTILO DOS CARDS --- */
+/* =============================================== */
+.categoria {
+    margin-bottom: 50px;
+    background-color: transparent; /* Fundo da categoria agora é transparente */
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+.categoria h3 {
+    font-family: var(--font-headings);
+    font-size: 3.5rem;
+    text-align: center;
+    color: var(--accent);
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--bg-card);
+    background-image: none; /* Removido background antigo */
+}
+
+.itens-categoria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+.item-cardapio {
+    background-color: var(--bg-card);
+    border: 1px solid #333;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.item-cardapio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+.item-cardapio.esgotado {
+    opacity: 0.6;
+}
+
+.item-cardapio img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 auto 15px auto;
+}
+.item-cardapio h4 {
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.item-cardapio p.descricao-item {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Faz a descrição ocupar o espaço e empurrar o preço para baixo */
+}
+.item-cardapio p.preco {
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--green);
+    font-size: 1.8rem;
+    margin: 10px 0;
+}
+
+.controle-item {
+    margin-top: auto;
+}
+.quantidade-seletor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.qtd-btn {
+    background: none;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+.qtd-btn:hover:not(:disabled) {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    border-color: var(--accent);
+}
+.qtd-btn:disabled { cursor: not-allowed; opacity: 0.4; }
+.quantidade-valor {
+    font-size: 1.2em;
+    font-weight: 700;
+    padding: 0 15px;
+    color: var(--accent);
+}
+
+.adicionar-carrinho {
+    background-color: var(--accent);
+    color: var(--bg-dark);
+    border: none;
+    padding: 12px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.25s;
+}
+.adicionar-carrinho:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+}
+.adicionar-carrinho:disabled {
+    background-color: #555;
+    color: #999;
+    cursor: not-allowed;
+}
+
+
+/* ======================================================== */
+/* --- 6. ÍCONE DE CARRINHO FLUTUANTE E RODAPÉ (FOOTER) --- */
+/* ======================================================== */
+#carrinho-flutuante {
+    position: fixed; bottom: 20px; right: 20px;
+    background-color: var(--accent);
+    color: white;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1010;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+#carrinho-flutuante:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+#contador-carrinho {
+    position: absolute; top: -8px; right: -8px;
+    background-color: var(--red);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px; font-weight: 600;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--accent);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.carrinho-vazio-flutuante {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.carrinho-vazio-flutuante #contador-carrinho {
+    transform: scale(0);
+}
+
+footer.main-footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    border-top: 3px solid var(--accent);
+}
+footer p { margin: 0; }
+
+
+/* ==================================================== */
+/* --- 7. MODAIS (POPUPS) - Estilo sutilmente ajustado --- */
+/* ==================================================== */
+.modal-overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1011; /* Acima do carrinho flutuante */
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.active {
+    opacity: 1; visibility: visible;
+}
+.modal-content {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    width: 90%; max-width: 500px;
+    position: relative;
+    text-align: center;
+    transform: translateY(-30px);
+    transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+.modal-close {
+    position: absolute; top: 10px; right: 15px;
+    font-size: 28px; font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+.success-icon { font-size: 50px; color: var(--green); margin-bottom: 15px; }
+.qrcode-container { width: 200px; height: 200px; margin: 20px auto; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+.qrcode-container img { width: 100% !important; height: 100% !important; }
+
+#myOrdersListContainer { max-height: 400px; overflow-y: auto; text-align: left;}
+.user-order-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.user-order-item:hover { background-color: #e9e9e9; }
+.user-order-item:last-child { border-bottom: none; }
+.order-item-header { display: flex; justify-content: space-between; align-items: center; }
+.order-item-header strong { font-size: 1.1em; }
+.status-badge { padding: 4px 8px; border-radius: 12px; font-size: 0.8em; color: white; }
+.status-badge.aguardando { background-color: #ffc107; }
+.status-badge.em_preparo { background-color: #17a2b8; }
+.status-badge.pronto { background-color: #28a745; }
+.status-badge.finalizado { background-color: #6c757d; }
+.order-item-details { font-size: 0.9em; color: #666; margin-top: 5px; }
+
+.checkout-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px; margin-bottom: 15px;
+}
+.checkout-header h3 { margin: 0; }
+.clear-cart-link { font-size: 0.85em; color: var(--red); text-decoration: none; font-weight: 600; }
+.clear-cart-link:hover { text-decoration: underline; }
+
+.order-summary-list {
+    max-height: 250px; overflow-y: auto;
+    border-top: 1px solid #eee; border-bottom: 1px solid #eee;
+    padding: 10px 0; margin: 20px 0;
+    text-align: left;
+}
+.summary-item { display: flex; justify-content: space-between; padding: 8px 5px; font-size: 0.95em; }
+.summary-item-name { color: #333; }
+.summary-item-price { color: #666; }
+.order-total-container {
+    display: flex; justify-content: space-between;
+    font-size: 1.3em; font-weight: bold; color: var(--green);
+    margin-bottom: 25px;
+}
+.payment-options { display: flex; flex-direction: column; gap: 10px; }
+.payment-options h4 { text-align: center; color: #555; margin-bottom: 15px; font-weight: 600; }
+.payment-button {
+    width: 100%; padding: 15px; font-size: 1.1em;
+    font-weight: bold; border-radius: 8px; border: none;
+    cursor: pointer; transition: all 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+}
+.payment-button:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.payment-button { background-color: var(--green); color: white; }
+.payment-button-secondary { background-color: #6c757d; color: white; }
+
+/* Estilos para o Modal de Pagamento */
+#payment-processing .spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid var(--accent);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#payment-processing p {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #555;
+}
+
+/* Adicionando ícone do Pix (se FontAwesome não tiver) */
+.fa-pix::before {
+  content: "Pix"; /* Simples fallback de texto */
+  font-weight: bold;
+}
+
+/* --- Estilos para a Interface de Pagamento Realista --- */
+.payment-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+.tab-button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+.tab-button.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+}
+
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+#card-form .input-group, #pix-form p {
+    text-align: left;
+    margin-bottom: 15px;
+}
+#card-form .form-row {
+    display: flex;
+    gap: 15px;
+}
+#card-form .input-group input[type="text"]:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.pix-qr-code {
+    display: block;
+    width: 180px;
+    height: 180px;
+    margin: 10px auto 20px;
+    border: 5px solid #fff;
+    border-radius: 8px;
+}
+
+/* --- Estilos para as Abas do Modal de Pedidos --- */
+.order-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+.order-tabs .tab-button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+.order-tabs .tab-button:hover {
+    background-color: #f0f0f0;
+}
+.order-tabs .tab-button.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+}
+
+.order-tab-content {
+    display: none; /* Esconde os conteúdos das abas por padrão */
+}
+
+.order-tab-content.active {
+    display: block; /* Mostra apenas o conteúdo da aba ativa */
+}
+
+/* Ajuste no seletor antigo para aplicar a altura máxima aos novos contêineres */
+#inProgressOrdersContainer, #completedOrdersContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+/* =============================================== */
+/* --- 8. Media Queries (AJUSTES DE RESPONSIVIDADE) --- */
+/* =============================================== */
+@media (max-width: 768px) {
+    header { padding: 1rem 15px; }
+    header h1 { font-size: 1.8rem; }
+    .hero-text h2 { font-size: 3rem; }
+    .hero-text p { font-size: 1rem; }
+
+    .header-button .header-button-text { display: none; }
+    .header-button i { font-size: 1.2rem; }
+
+    .categoria h3 { font-size: 2.5rem; }
+    
+    /* --- INÍCIO DA CORREÇÃO DO CARROSSEL --- */
+    
+    /* Aplicando o layout de carrossel ao contêiner dos itens */
+    .itens-categoria {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Melhora a fluidez da rolagem no iOS */
+        
+        /* Remove o layout de grid padrão e adiciona um espaçamento */
+        grid-template-columns: none; 
+        padding-bottom: 20px;
+        margin: 0 15px; /* Adiciona margens laterais para não colar na tela */
+    }
+
+    /* Ajustando cada item do cardápio para o carrossel */
+    .item-cardapio {
+        flex: 0 0 70%; /* Cada item terá 80% da largura da tela */
+        width: 70%;
+        margin-right: 20px; /* Espaçamento entre os itens */
+    }
+
+    /* Escondendo a barra de rolagem (opcional, mas esteticamente melhor) */
+    .itens-categoria::-webkit-scrollbar {
+        display: none;
+    }
+    .itens-categoria {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    
+    /* --- FIM DA CORREÇÃO DO CARROSSEL --- */
+
+    #navbar-categorias ul {
+    list-style: none; margin: 0; padding: 0 15px;
+    display: flex; justify-content: flex-start; gap: 15px;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+}
+
+
+@media (max-width: 480px) {
+    header h1 { font-size: 1.5rem; }
+    #navbar-categorias ul { padding: 0 10px; gap: 8px; }
+    #navbar-categorias ul li a { padding: 0.5rem 1rem; font-size: 0.9em; }
+
+    .hero-text h2 { font-size: 2.5rem; }
+    
+    .item-cardapio img { height: 150px; }
+
+    #carrinho-flutuante { width: 55px; height: 55px; font-size: 22px; bottom: 15px; right: 15px; }
+    #contador-carrinho { width: 24px; height: 24px; font-size: 12px; }
+}

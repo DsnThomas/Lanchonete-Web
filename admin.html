@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Espaço Lanches</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-utensils"></i>
+                <h2>Espaço Lanches</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active"><a href="#" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li class="nav-item"><a href="pdv.html" target="_blank"><i class="fas fa-cash-register"></i> Ponto de Venda (PDV)</a></li>
+                    <li class="nav-item"><a href="pedidos.html"><i class="fas fa-receipt"></i> Fila de Pedidos</a></li>
+                    <li class="nav-item"><a href="#" data-section="employee-management"><i class="fas fa-users-cog"></i> Gerenciar Equipe</a></li>
+                    <li class="nav-item"><a href="#" data-section="role-management"><i class="fas fa-briefcase"></i> Gerenciar Cargos</a></li> <li class="nav-item"><a href="#" data-section="supplier-management"><i class="fas fa-truck"></i> Gerenciar Fornecedores</a></li>
+                    <li class="nav-item"><a href="#" data-section="product-management"><i class="fas fa-hamburger"></i> Gerenciar Produtos</a></li>
+                    <li class="nav-item"><a href="#" data-section="stock-management"><i class="fas fa-boxes"></i> Gerenciar Estoque</a></li>
+                    <li class="nav-item"><a href="relatorios.html"><i class="fas fa-chart-line"></i><span>Relatórios de Vendas</span></a></li>
+                    <li class="nav-item active"><a href="relatorio-produtos.html"><i class="fas fa-box-open"></i><span>Relatório de Produtos</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-button" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Bem-vindo ao Painel de Controle!</h1>
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="loggedInUserName">Administrador</span>
+                </div>
+            </header>
+
+            <section class="content-section active" id="dashboard">
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>Itens no Cardápio</h3>
+                        <p class="card-value" id="dashboard-menu-items">0</p>
+                        <i class="fas fa-book-open card-icon"></i>
+                    </div>
+                    <div class="card">
+                        <h3>Pedidos Pendentes</h3>
+                        <p class="card-value" id="dashboard-pending-orders">0</p>
+                        <i class="fas fa-clock card-icon"></i>
+                    </div>
+                    <div class="card">
+                        <h3>Faturamento Mensal</h3>
+                        <p class="card-value" id="dashboard-monthly-revenue">R$ 0,00</p>
+                        <i class="fas fa-dollar-sign card-icon"></i>
+                    </div>
+                </div>
+                <div class="dashboard-logo-container">
+                                    <img src="C:\Users\Thomas Jefferson\Desktop\Espaço Lanches\Login\logo.png" alt="Logo Espaço Lanches">
+                </div>
+            </section>
+            
+            <section class="content-section" id="employee-management">
+                <h2>Gerenciar Equipe</h2>
+                <div class="form-container">
+                    <h3>Cadastrar Novo Membro da Equipe</h3>
+                    <form class="admin-form" id="registerEmployeeForm">
+                        <div class="input-group">
+                            <label for="newFirstName">Nome:</label>
+                            <input type="text" id="newFirstName" name="newFirstName" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="newEmail">E-mail:</label>
+                            <input type="email" id="newEmail" name="newEmail" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="newPassword">Senha:</label>
+                            <input type="password" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="newPassword2">Confirme a Senha:</label>
+                            <input type="password" id="newPassword2" name="newPassword2" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="addressStreet">Rua:</label>
+                            <input type="text" id="addressStreet" name="addressStreet">
+                        </div>
+                        <div class="input-group">
+                            <label for="addressNumber">Número:</label>
+                            <input type="text" id="addressNumber" name="addressNumber">
+                        </div>
+                        <div class="input-group">
+                            <label for="addressNeighborhood">Bairro:</label>
+                            <input type="text" id="addressNeighborhood" name="addressNeighborhood">
+                        </div>
+                        <div class="input-group">
+                            <label for="addressCity">Cidade:</label>
+                            <input type="text" id="addressCity" name="addressCity">
+                        </div>
+                        <div class="input-group">
+                            <label for="newCpf">CPF:</label>
+                            <input type="text" id="newCpf" name="newCpf" placeholder="Ex: 123.456.789-00">
+                        </div>
+                        <div class="input-group">
+                            <label for="newSalary">Salário:</label>
+                            <input type="number" id="newSalary" name="newSalary" step="0.01" placeholder="Ex: 1500.00">
+                        </div>
+                        <div class="input-group">
+                            <label for="newPhone">Telefone:</label>
+                            <input type="text" id="newPhone" name="newPhone" placeholder="Ex: (XX) XXXX-XXXX ou (XX) 9XXXX-XXXX">
+                        </div>
+                        <div class="input-group">
+                            <label for="newDateOfBirth">Data de Nascimento:</label>
+                            <input type="date" id="newDateOfBirth" name="newDateOfBirth">
+                        </div>
+                        <div class="input-group">
+                            <label for="newAdmissionDate">Data de Admissão:</label>
+                            <input type="date" id="newAdmissionDate" name="newAdmissionDate">
+                        </div>
+                        <div class="input-group">
+                            <label for="newShift">Turno:</label>
+                            <select id="newShift" name="newShift">
+                                <option value="">Selecione o Turno</option>
+                                <option value="manha">Manhã</option>
+                                <option value="tarde">Tarde</option>
+                                <option value="noite">Noite</option>
+                                <option value="integral">Integral</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="newMaritalStatus">Estado Civil:</label>
+                            <select id="newMaritalStatus" name="newMaritalStatus">
+                                <option value="">Selecione o Estado Civil</option>
+                                <option value="solteiro">Solteiro(a)</option>
+                                <option value="casado">Casado(a)</option>
+                                <option value="divorciado">Divorciado(a)</option>
+                                <option value="viuvo">Viúvo(a)</option>
+                                <option value="uniao_estavel">União Estável</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="newRole">Cargo:</label>
+                            <select id="newRole" name="newRole" required>
+                                <option value="">Selecione um Cargo</option>
+                                </select>
+                        </div>
+                        
+                        <button type="submit" class="submit-button">Cadastrar Funcionário</button>
+                    </form>
+                </div>
+                <div class="table-container">
+                    <h3>Funcionários Cadastrados</h3>
+                    <table id="employeesTable">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>Cargo</th> <th>Turno</th>
+                                <th>Salário</th>
+                                <th>Data Nasc.</th>
+                                <th>Admissão</th>
+                                <th>Estado Civil</th>
+                                <th>Endereço</th> <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <p id="noEmployeesMessage" class="hidden">Nenhum funcionário cadastrado ainda.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="role-management">
+                <h2>Gerenciar Cargos</h2>
+                <div class="form-container">
+                    <h3>Criar Novo Cargo</h3>
+                    <form class="admin-form" id="createRoleForm">
+                        <div class="input-group">
+                            <label for="roleName">Nome do Cargo:</label>
+                            <input type="text" id="roleName" name="roleName" required>
+                        </div>
+                        <button type="submit" class="submit-button">Criar Cargo</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h3>Cargos Existentes</h3>
+                    <table id="rolesTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome do Cargo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                    <p id="noRolesMessage" class="hidden">Nenhum cargo cadastrado ainda.</p>
+                </div>
+            </section>
+            <section class="content-section" id="supplier-management">
+                <h2>Gerenciar Fornecedores</h2>
+                <div class="form-container">
+                    <h3 id="supplierFormTitle">Adicionar Novo Fornecedor</h3>
+                    <form class="admin-form" id="supplierForm">
+                        <div class="input-group">
+                            <label for="supplierName">Nome do Fornecedor:</label>
+                            <input type="text" id="supplierName" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="supplierCnpjCpf">CNPJ/CPF:</label>
+                            <input type="text" id="supplierCnpjCpf" placeholder="00.000.000/0000-00">
+                        </div>
+                        <div class="input-group">
+                            <label for="supplierContactPerson">Pessoa de Contato:</label>
+                            <input type="text" id="supplierContactPerson">
+                        </div>
+                        <div class="input-group">
+                            <label for="supplierPhone">Telefone (Opcional):</label>
+                            <input type="text" id="supplierPhone" placeholder="(XX) XXXXX-XXXX">
+                        </div>
+                        <div class="input-group">
+                            <label for="supplierEmail">E-mail:</label>
+                            <input type="email" id="supplierEmail" placeholder="email@exemplo.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="supplierStreet">Rua:</label>
+                            <input type="text" id="supplierStreet">
+                        </div>
+                        <div class="input-group">
+                            <label for="supplierNumber">Número:</label>
+                            <input type="text" id="supplierNumber">
+                        </div>
+                        <div class="input-group">
+                            <label for="supplierNeighborhood">Bairro:</label>
+                            <input type="text" id="supplierNeighborhood">
+                        </div>
+                        <div class="input-group">
+                            <label for="supplierCity">Cidade:</label>
+                            <input type="text" id="supplierCity">
+                        </div>
+                        <button type="submit" class="submit-button" id="saveSupplierButton">Salvar Fornecedor</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h3>Fornecedores Cadastrados</h3>
+                    <table id="suppliersTable">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>CNPJ/CPF</th>
+                                <th>Contato</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th>Cidade</th>
+                                <th>Endereço</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                    <p id="noSuppliersMessage" class="hidden">Nenhum fornecedor cadastrado ainda.</p>
+                </div>
+            </section>
+            <section class="content-section" id="product-management">
+                <h2>Gerenciar Produtos do Cardápio</h2>
+                <div class="form-container">
+                    <h3 id="menuProductFormTitle">Adicionar Novo Produto ao Cardápio</h3>
+                    <form class="admin-form" id="menuProductForm" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <label for="menuProductName">Nome no Cardápio:</label>
+                            <input type="text" id="menuProductName" name="menuProductName" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="menuProductStockItem">Item de Estoque de Origem:</label>
+                            <select id="menuProductStockItem" name="menuProductStockItem" required>
+                                <option value="">Selecione o Item de Estoque...</option>
+                                </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="menuProductDescription">Descrição (Opcional):</label>
+                            <textarea id="menuProductDescription" name="menuProductDescription" rows="3" placeholder="Ex: Delicioso hambúrguer com queijo especial..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="menuProductSalePrice">Preço de Venda (R$):</label>
+                            <input type="number" id="menuProductSalePrice" name="menuProductSalePrice" step="0.01" min="0" required placeholder="Ex: 15.50">
+                        </div>
+                        <div class="input-group">
+                            <label for="menuProductImage">Foto para o Cardápio (Opcional):</label>
+                            <input type="file" id="menuProductImage" name="menuProductImage" accept="image/*">
+                            <img id="menuProductImagePreview" src="#" alt="Pré-visualização da Imagem" class="image-preview hidden"/>
+                        </div>
+                        <div class="input-group checkbox-group">
+                            <input type="checkbox" id="menuProductIsActive" name="menuProductIsActive" checked>
+                            <label for="menuProductIsActive" class="checkbox-label">Ativo no Cardápio?</label>
+                        </div>
+                        <button type="submit" class="submit-button" id="saveMenuProductButton">Salvar Produto</button>
+                    </form>
+                </div>
+
+                <div class="stock-display-container"> <h3>Produtos no Cardápio</h3>
+                    <div id="menuProductsGrid" class="card-grid">
+                        </div>
+                    <p id="noMenuProductsMessage" class="hidden">Nenhum produto cadastrado no cardápio ainda.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="stock-management">
+                <h2>Gerenciar Estoque</h2>
+
+                <div class="category-management-container">
+                    <div class="form-container">
+                        <h3>Gerenciar Categorias</h3>
+                        <form class="admin-form" id="categoryForm">
+                            <div class="input-group">
+                                <label for="categoryName">Nome da Nova Categoria:</label>
+                                <input type="text" id="categoryName" name="categoryName" required>
+                            </div>
+                            <button type="submit" class="submit-button">Salvar Categoria</button>
+                        </form>
+                    </div>
+            
+                    <div class="table-container">
+                        <h3>Categorias Existentes</h3>
+                        <table id="categoriesTable">
+                            <thead>
+                                <tr>
+                                    <th>Nome da Categoria</th>
+                                    <th class="actions-column">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                        </table>
+                        <p id="noCategoriesMessage" class="hidden">Nenhuma categoria cadastrada.</p>
+                    </div>
+                </div>
+                <hr> <div class="form-container">
+                    <h3 id="stockFormTitle">Adicionar/Atualizar Item de Estoque</h3>
+                    <form class="admin-form" id="stockItemForm" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <label for="stockItemName">Nome do Item:</label>
+                            <input type="text" id="stockItemName" name="stockItemName" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemCategory">Categoria:</label>
+                            <select id="stockItemCategory" name="stockItemCategory" required>
+                                <option value="">Selecione a Categoria</option>
+                                </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="stockItemSupplier">Fornecedor:</label>
+                            <select id="stockItemSupplier" name="stockItemSupplier" required>
+                                <option value="">Selecione o Fornecedor</option>
+                                </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemQuantity">Quantidade:</label>
+                            <input type="number" id="stockItemQuantity" name="stockItemQuantity" step="0.01" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemUnit">Unidade de Medida:</label>
+                            <select id="stockItemUnit" name="stockItemUnit" required>
+                                <option value="">Selecione a Unidade</option>
+                                <option value="unidades">Unidades</option>
+                                <option value="kg">Kilogramas (Kg)</option>
+                                <option value="gramas">Gramas (g)</option>
+                                <option value="litros">Litros (L)</option>
+                                <option value="ml">Mililitros (ml)</option>
+                                <option value="pacote">Pacote</option>
+                                <option value="caixa">Caixa</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemCostPrice">Preço de Custo (Opcional):</label>
+                            <input type="number" id="stockItemCostPrice" name="stockItemCostPrice" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemProfitPercentage">Margem de Lucro (%):</label>
+                            <input type="number" id="stockItemProfitPercentage" name="stockItemProfitPercentage" step="0.01" value="100.00" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemMinLevel">Estoque Mínimo (Opcional):</label>
+                            <input type="number" id="stockItemMinLevel" name="stockItemMinLevel" step="0.01">
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemExpiryDate">Data de Validade (Opcional):</label>
+                            <input type="date" id="stockItemExpiryDate" name="stockItemExpiryDate">
+                        </div>
+                        <div class="input-group">
+                            <label for="stockItemImage">Foto do Item (Opcional):</label>
+                            <input type="file" id="stockItemImage" name="stockItemImage" accept="image/*">
+                        </div>
+                        <button type="submit" class="submit-button">Salvar Item</button>
+                    </form>
+                </div>
+
+                <div class="stock-display-container">
+                    <h3>Itens em Estoque</h3>
+                    <div id="stockItemsGrid" class="card-grid">
+                        </div>
+                    <p id="noStockItemsMessage" class="hidden">Nenhum item em estoque cadastrado ainda.</p>
+                </div>
+            </section>
+
+            <section class="content-section" id="reports">
+                <h2>Relatórios</h2>
+                <p>Conteúdo para relatórios de vendas, estoque, etc.</p>
+            </section>
+
+            <section class="content-section" id="settings">
+                <h2>Configurações</h2>
+                <p>Conteúdo para configurações do sistema.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="permissionsModalOverlay">
+
+        <div class="modal-content">
+
+            <header class="modal-header">
+                <h3 id="permissionsModalTitle">Editar Permissões para: </h3>
+                <button class="modal-close-button" id="closePermissionsModalBtn">&times;</button>
+            </header>
+
+            <div class="modal-body">
+                <form id="permissionsForm">
+                    <input type="hidden" id="cargoIdForPermissions" />
+
+                    <div id="permissionsCheckboxesContainer">
+                        <p>Carregando permissões...</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="submit-button" id="cancelPermissionsBtn">Cancelar</button>
+                        <button type="submit" class="submit-button">Salvar Permissões</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

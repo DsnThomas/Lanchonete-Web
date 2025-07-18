@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Registro - Espaço Lanches</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+    <div class="form-container">
+        <div class="logo">
+            <i class="fas fa-hamburger"></i>
+            <h1>Espaço Lanches</h1>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+            <h2>🍔 Bem-vindo! 🍟</h2>
+            <div class="role-selection" id="roleSelection">
+                <button type="button" class="role-button active" id="btn-cliente" data-role="estudante">Estudante</button>
+                <div id="employee-role-container" class="hidden">
+                    <button type="button" class="role-button" id="btn-funcionario" data-role="equipe">Equipe</button>
+                </div>
+            </div>
+            <p class="toggle-employee-option" id="toggleEmployeeOption">
+                <a href="#" class="employee-toggle-link">Sou da Equipe</a>
+            </p>
+            <div class="input-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required placeholder="seuemail@unifucamp.edu.br">
+                <span class="error-message" id="loginEmailError"></span>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required placeholder="Sua senha">
+                <span class="error-message" id="loginPasswordError"></span>
+            </div>
+            <button type="submit" class="auth-button">ENTRAR</button>
+        </form>
+
+        <form class="auth-form hidden" id="registerForm">
+            <h2>Novo por aqui? Cadastre-se!</h2>
+            <div class="input-group">
+                <label for="reg-first-name">Nome:</label>
+                <input type="text" id="reg-first-name" name="reg-first-name" required>
+                <span class="error-message" id="regFirstNameError"></span>
+            </div>
+            <div class="input-group">
+                <label for="reg-email">E-mail:</label>
+                <input type="email" id="reg-email" name="reg-email" required>
+                <span class="error-message" id="regEmailError"></span>
+                <small class="input-hint">Utilize um e-mail válido.</small>
+            </div>
+            <div class="input-group">
+                <label for="reg-password">Senha:</label>
+                <input type="password" id="reg-password" name="reg-password" required>
+                <span class="error-message" id="regPasswordError"></span>
+                <small class="input-hint">Mínimo 8 caracteres, com letra maiúscula, minúscula e número.</small>
+            </div>
+            <div class="input-group">
+                <label for="reg-password2">Confirme a Senha:</label>
+                <input type="password" id="reg-password2" name="reg-password2" required>
+                <span class="error-message" id="regPassword2Error"></span>
+            </div>
+            <button type="submit" class="auth-button">Criar Conta</button>
+        </form>
+
+        <form class="auth-form hidden" id="requestPasswordResetForm">
+            <h2>🔑 Esqueceu sua Senha?</h2>
+            <p class="form-description">Digite seu e-mail e enviaremos um código para você redefinir sua senha.</p>
+            <div class="input-group">
+                <label for="resetEmail">Seu E-mail:</label>
+                <input type="email" id="resetEmail" name="resetEmail" required>
+                <span class="error-message" id="resetEmailError"></span>
+            </div>
+            <button type="submit" class="auth-button">Enviar Código</button>
+            <p class="toggle-link-center"><a href="#" id="backToLoginFromRequest">Voltar para Login</a></p>
+        </form>
+
+        <form class="auth-form hidden" id="confirmPasswordResetForm">
+            <h2>🔒 Redefinir Senha</h2>
+            <p class="form-description">Digite o código recebido e sua nova senha.</p>
+            <input type="hidden" id="emailForConfirmReset" name="emailForConfirmReset">
+            <div class="input-group">
+                <label for="resetCode">Código de Redefinição:</label>
+                <input type="text" id="resetCode" name="resetCode" required>
+                <span class="error-message" id="resetCodeError"></span>
+            </div>
+            <div class="input-group">
+                <label for="newResetPassword">Nova Senha:</label>
+                <input type="password" id="newResetPassword" name="newResetPassword" required>
+                <span class="error-message" id="newResetPasswordError"></span>
+            </div>
+            <div class="input-group">
+                <label for="confirmNewResetPassword">Confirme a Nova Senha:</label>
+                <input type="password" id="confirmNewResetPassword" name="confirmNewResetPassword" required>
+                <span class="error-message" id="confirmNewResetPasswordError"></span>
+            </div>
+            <button type="submit" class="auth-button">Redefinir Senha</button>
+            <p class="toggle-link-center"><a href="#" id="backToLoginFromConfirm">Voltar para Login</a></p>
+        </form>
+
+        <div class="bottom-links">
+            <p id="forgotPasswordContainer">
+                <a href="#" id="forgotPasswordLink">Esqueceu a senha?</a>
+            </p>
+            <p id="toggleToRegister">Novo por aqui? <a href="#">Crie sua conta!</a></p>
+            <p class="hidden" id="toggleToLogin">Já tem conta? <a href="#">Entrar!</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

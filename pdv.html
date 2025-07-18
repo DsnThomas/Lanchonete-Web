@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDV - Ponto de Venda</title>
+    <link rel="stylesheet" href="pdv-style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body class="pdv-body">
+
+    <div class="pdv-wrapper">
+        <div class="pdv-products-panel">
+            <header class="pdv-header">
+                <a href="admin.html" class="back-to-admin"><i class="fas fa-arrow-left"></i> Voltar ao Painel</a>
+                <div class="pdv-search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="productSearchInput" placeholder="Buscar produto...">
+                </div>
+                <button class="action-button" id="newOrderBtnPDV" title="Limpar e iniciar um novo pedido">
+                    <i class="fas fa-plus"></i> Novo Pedido
+                </button>
+                <button class="action-button" id="loadPendingOrdersBtn" title="Carregar pedidos aguardando pagamento">
+                    <i class="fas fa-file-invoice-dollar"></i> Pagar Pedido
+                </button>
+                <button class="action-button" id="scanQrCodeBtnPDV" title="Ler QR Code do Pedido">
+                    <i class="fas fa-qrcode"></i> Ler QR Code
+                </button>
+                <div class="pdv-category-filter">
+                    <select id="categoryFilterSelect">
+                        <option value="all">Todas as Categorias</option>
+                    </select>
+                </div>
+            </header>
+            <div class="pdv-products-panel">
+            <header class="pdv-header">
+                </header>
+
+            <div id="qr-reader-pdv" class="qr-reader-container"></div>
+            
+            <main class="pdv-product-grid" id="pdvProductGrid"></main>
+            </div>
+            <main class="pdv-product-grid" id="pdvProductGrid"></main>
+        </div>
+
+        <div class="pdv-order-panel">
+            <div class="order-summary">
+                <h3>Pedido Atual</h3>
+                <div class="order-items-list" id="orderItemsList">
+                    <p class="empty-cart-message">O carrinho está vazio.</p>
+                </div>
+            </div>
+            <div class="order-total-section">
+                <div class="total-line">
+                    <span>Subtotal</span>
+                    <span id="subtotalValue">R$ 0,00</span>
+                </div>
+                <div class="total-line grand-total">
+                    <span>TOTAL</span>
+                    <span id="totalValue">R$ 0,00</span>
+                </div>
+                <button class="finalize-button" id="finalizeSaleBtn" disabled>
+                    <i class="fas fa-dollar-sign"></i> Finalizar Venda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="paymentPdvModal">
+        <div class="modal-content">
+            <span class="modal-close" id="paymentPdvModalClose">&times;</span>
+            <h3>Finalizar Venda</h3>
+            <div class="order-total-container">
+                <strong>Total a Pagar:</strong>
+                <strong id="paymentModalTotal">R$ 0,00</strong>
+            </div>
+            <div class="payment-options">
+                <h4>Selecione a forma de pagamento:</h4>
+                <button class="payment-button" data-method="DINHEIRO"><i class="fas fa-money-bill-wave"></i> Dinheiro</button>
+                <button class="payment-button" data-method="CARTAO_DEBITO"><i class="fas fa-credit-card"></i> Cartão de Débito</button>
+                <button class="payment-button" data-method="CARTAO_CREDITO"><i class="fas fa-credit-card"></i> Cartão de Crédito</button>
+                <button class="payment-button" data-method="PIX"><i class="fas fa-qrcode"></i> Pix</button>
+            </div>
+        </div>
+    </div>
+
+        <div class="modal-overlay hidden" id="receiptModal">
+        <div class="modal-content">
+            <div id="printable-receipt">
+                <h3>Pedido Registrado!</h3>
+                <p>Entregue este recibo ao cliente.</p>
+                <h4 id="receiptOrderId">Pedido #000</h4>
+                <div class="receipt-qrcode" id="receiptQrCode"></div>
+            </div>
+            
+            <div class="receipt-actions">
+                <button class="action-button" id="printReceiptBtn"><i class="fas fa-print"></i> Imprimir Recibo</button>
+                <button class="action-button" id="newOrderBtn"><i class="fas fa-plus"></i> Novo Pedido</button>
+            </div>
+        </div>
+    </div>
+
+        <div class="modal-overlay hidden" id="pendingOrdersModal">
+        <div class="modal-content">
+            <span class="modal-close" id="pendingOrdersModalClose">&times;</span>
+            <h3>Pedidos Aguardando Pagamento</h3>
+            <div class="modal-body">
+                <ul class="simple-list" id="pendingOrdersList">
+                    </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="pdv-script.js"></script>
+</body>
+</html>

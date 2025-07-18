@@ -1,0 +1,240 @@
+/* Estilos gerais */
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #495057;
+    -webkit-tap-highlight-color: transparent;
+}
+
+header {
+    background-image: linear-gradient(to right, #ff8c00, #ffae42);
+    color: #fff;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border-bottom: #e07b00 4px solid;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.25);
+    letter-spacing: 0.5px;
+}
+
+#navbar-categorias {
+    background-color: #ffffff;
+    padding: 0.75rem 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.07);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#navbar-categorias ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 15px;
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    gap: 8px;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+#navbar-categorias ul::-webkit-scrollbar { display: none; }
+
+#navbar-categorias ul li a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #5a6268;
+    text-decoration: none;
+    padding: 0.6rem 1.1rem;
+    border-radius: 25px;
+    transition: all 0.25s ease-in-out;
+    display: inline-block;
+    border: 1px solid transparent;
+    white-space: nowrap; 
+}
+
+#navbar-categorias ul li a:hover {
+    background-color: #fff0e0;
+    color: #d97706;
+    transform: translateY(-2px) scale(1.02);
+    border-color: #ffe8cc;
+}
+
+#navbar-categorias ul li a.active-nav-link {
+    background-color: #ff8c00;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 3px 7px rgba(255, 140, 0, 0.45);
+    transform: scale(1.03); 
+    position: relative;
+}
+
+#navbar-categorias ul li a.active-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px; 
+    height: 5px; 
+    background-color: #e07b00;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fadeInPoint 0.3s forwards ease-out;
+}
+
+@keyframes fadeInPoint {
+    to { opacity: 1; bottom: -8px; }
+}
+
+/* Layout principal simplificado */
+main {
+    display: block; /* Alterado de flex para block */
+    padding: 20px 15px; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+#cardapio {
+    /* Propriedades de flex removidas, ele ocupará o espaço naturalmente */
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%; 
+}
+
+/* Estilos de categoria e itens mantidos */
+.categoria {
+    margin-bottom: 30px; 
+    background-color: #fff;
+    padding: 20px; 
+    border-radius: 12px; 
+    box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+    position: relative;
+}
+.categoria h3 {
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(to right, #ffa033, #ff8c00);
+    color: #fff;
+    padding: 15px 20px; 
+    border-radius: 8px 8px 0 0; 
+    margin: -20px -20px 20px -20px; 
+    font-size: 1.5em; 
+    font-weight: 600;
+}
+.itens-categoria {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px; 
+    padding-top: 0;
+}
+.item-cardapio {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 20px; 
+    background-color: #fff;
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    position: relative;
+}
+.item-cardapio:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+.item-cardapio img { width: 100%; max-width: 160px; height: 140px; object-fit: cover; border-radius: 8px; margin: 0 auto 15px auto; border: none; }
+.item-cardapio h4 { font-family: 'Poppins', sans-serif; margin: 0 0 10px 0; font-size: 1.15em; font-weight: 600; color: #343a40; }
+.item-cardapio p.descricao-item { font-size: 0.9em; color: #6c757d; margin: 0 auto 12px auto; line-height: 1.5; }
+.item-cardapio p.preco { font-family: 'Poppins', sans-serif; font-weight: 700; color: #218838; font-size: 1.5em; margin-bottom: 15px; }
+.controle-item { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 10px; }
+.quantidade-seletor { display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid #bcc3ca; border-radius: 20px; overflow: hidden; background-color: #f8f9fa; }
+.qtd-btn { background-color: transparent; border: none; color: #495057; font-weight: 600; cursor: pointer; padding: 8px 14px; }
+.qtd-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.quantidade-valor { font-size: 1.1em; font-weight: 700; padding: 0 12px; color: #28a745; }
+.adicionar-carrinho { font-family: 'Poppins', sans-serif; background-image: linear-gradient(to right, #28a745, #218838); color: white; border: none; padding: 12px 25px; text-align: center; font-size: 1em; font-weight: 600; border-radius: 25px; cursor: pointer; transition: all 0.25s ease-out; width: 100%; max-width: 280px; box-shadow: 0 4px 8px rgba(40, 167, 69, 0.35); }
+.adicionar-carrinho:hover:not(:disabled) { background-image: linear-gradient(to right, #218838, #1e7e34); transform: translateY(-2px) scale(1.02); }
+
+
+/* TODOS OS ESTILOS PARA #carrinho-compras, #lista-itens-carrinho, #total-carrinho, #finalizar-compra FORAM REMOVIDOS */
+
+
+footer {
+    text-align: center; 
+    padding: 25px 15px; 
+    background-color: #2c3e50;
+    color: #bdc3c7;
+    margin-top: 30px; 
+    font-size: 0.9em; 
+    border-top: 4px solid #ff8c00;
+}
+footer p { margin: 0; }
+
+/* ========================================================= */
+/* --- ESTILOS DO ÍCONE DE CARRINHO FLUTUANTE (MANTIDOS) --- */
+/* ========================================================= */
+#carrinho-flutuante { position: fixed; bottom: 20px; right: 20px; background-image: linear-gradient(to right, #ff8c00, #ffae42); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1010; transition: all 0.3s ease; border: 2px solid white; }
+#carrinho-flutuante:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+#contador-carrinho { position: absolute; top: -8px; right: -8px; background-color: #e63946; color: white; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.carrinho-vazio-flutuante { opacity: 0.7; cursor: not-allowed; pointer-events: none; }
+.carrinho-vazio-flutuante #contador-carrinho { transform: scale(0); }
+
+
+/* =============================================== */
+/* --- Media Queries (AJUSTADOS) --- */
+/* =============================================== */
+@media (min-width: 769px) {
+    header h1 { font-size: 2.8rem; }
+    #navbar-categorias ul { justify-content: center; overflow-x: visible; gap: 12px; }
+    #navbar-categorias ul li a { padding: 0.7rem 1.4rem; }
+
+    main {
+        padding: 40px 25px;
+        max-width: 1200px; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .itens-categoria {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+    }
+    
+    /* Estilos de #carrinho-compras que estavam aqui foram removidos */
+}
+
+@media (min-width: 993px) {
+    main { max-width: 1300px; padding: 40px 35px; }
+    .itens-categoria { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    header h1 { font-size: 3rem; }
+}
+
+@media (max-width: 480px) {
+    header h1 { font-size: 1.8rem; }
+    #navbar-categorias ul { padding: 0 10px; gap: 5px; }
+    #navbar-categorias ul li a { padding: 0.5rem 0.9rem; font-size: 0.8em; }
+    main { padding: 15px 10px; }
+    .categoria { padding: 15px; }
+    .categoria h3 { font-size: 1.3em; margin: -15px -15px 15px -15px; }
+    .item-cardapio img { height: 130px; }
+    
+    /* Ajuste do ícone flutuante para telas bem pequenas */
+    #carrinho-flutuante { width: 55px; height: 55px; font-size: 22px; bottom: 15px; right: 15px; }
+    #contador-carrinho { width: 24px; height: 24px; font-size: 12px; }
+}

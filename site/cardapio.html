@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete TopSabor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <h1>Lanchonete TopSabor</h1>
+    </header>
+
+    <nav id="navbar-categorias">
+        <ul>
+            <li><a href="#secao-salgados" class="nav-link">Salgados</a></li>
+            <li><a href="#secao-jantinhas" class="nav-link">Jantinhas</a></li>
+            <li><a href="#secao-bebidas" class="nav-link">Bebidas</a></li>
+            <li><a href="#secao-doces" class="nav-link">Doces</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="cardapio">
+            <div class="categoria" id="secao-salgados"><h3>Salgados</h3><div class="itens-categoria"></div></div>
+            <div class="categoria" id="secao-jantinhas"><h3>Jantinhas</h3><div class="itens-categoria"></div></div>
+            <div class="categoria" id="secao-bebidas"><h3>Bebidas</h3><div class="itens-categoria"></div></div>
+            <div class="categoria" id="secao-doces"><h3>Doces</h3><div class="itens-categoria"></div></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lanchonete TopSabor. Todos os direitos reservados.</p>
+    </footer>
+    
+    <a href="#" id="carrinho-flutuante" aria-label="Finalizar Compra" class="carrinho-vazio-flutuante">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="contador-carrinho">0</span>
+    </a>
+
+    <script src="cardapio-script.js"></script>
+</body>
