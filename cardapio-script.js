@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const payOnlineBtn = document.getElementById('payOnlineBtn');
     const clearCartBtn = document.getElementById('clearCartBtn');
     const logoutBtn = document.getElementById('logoutBtn');
-    const paymentModal = document.getElementById('paymentModal'); // O overlay do modal pode ficar aqui
+    const paymentModal = document.getElementById('paymentModal');
 
     // --- Estado da Aplicação ---
     let carrinho = [];
@@ -277,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Após sucesso, atualiza o status
                 setTimeout(async () => {
                     try {
-                        // --- CORREÇÃO PRINCIPAL AQUI ---
                         // Chamando a nova rota segura com o método POST
                         const updateResponse = await fetch(`${API_BASE_URL}/orders/sales/${orderId}/confirm-payment/`, {
                             method: 'POST', // Usamos POST para esta ação
@@ -400,16 +399,14 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModalListeners(successModal, successModalClose);
     setupModalListeners(myOrdersModal, myOrdersModalClose);
     setupModalListeners(checkoutModal, checkoutModalClose);
-    // Não adicionamos listener para o paymentModal aqui porque ele não tem botão de fechar
 
     if (payOnPickupBtn) payOnPickupBtn.addEventListener('click', () => processarPedido('NA_RETIRADA'));
     if (payOnlineBtn) payOnlineBtn.addEventListener('click', () => processarPedido('ONLINE'));
 
     if (myOrdersBtn) myOrdersBtn.addEventListener('click', showMyOrders);
     
-    if (myOrdersModal) { // Mudamos o alvo para o modal inteiro
+    if (myOrdersModal) { 
         myOrdersModal.addEventListener('click', (event) => {
-            // A lógica de encontrar o item clicado permanece a mesma
             const orderItem = event.target.closest('.user-order-item');
 
             // Verificamos se um item de pedido com QR Code foi realmente clicado
