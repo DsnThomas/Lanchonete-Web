@@ -145,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
    };
 
     // --- Funções Auxiliares e de Navegação ---
-    // NOVA FUNÇÃO PARA CARREGAR DADOS DO DASHBOARD
     const loadDashboardData = async () => {
         try {
             const headers = { 'Authorization': `Bearer ${accessToken}` };
@@ -176,15 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('dashboard-monthly-revenue').textContent = `R$ ${parseFloat(totalRevenue).toFixed(2)}`;
             }
             
-            // 4. Total de Clientes (Placeholder)
-            // OBS: O endpoint para contar clientes ainda precisa ser criado no backend.
-            // Quando existir, a lógica será parecida com as outras. Ex:
-            // const clientsResponse = await fetch(`${USERS_API_URL}/clients/`, { headers });
-            // if (clientsResponse.ok) { ... }
 
         } catch (error) {
             console.error("Erro ao carregar dados do dashboard:", error);
-            // Pode-se adicionar uma mensagem de erro no dashboard se desejar
         }
     };
 
@@ -207,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showSection = (sectionId) => {
          if (!hasPermission(sectionId)) {
              alert('Você não tem permissão para acessar esta área.');
-         return; // Impede que o resto da função seja executado
+         return;
     }
         contentSections.forEach(section => section.classList.remove('active'));
         const activeSection = document.getElementById(sectionId);
@@ -232,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
         editingSupplierId = null;
         editingMenuProductId = null;
 
-        // --- ATUALIZAÇÃO IMPORTANTE ---
         // Carregar dados da seção ativa
         if (sectionId === 'dashboard') {
             loadDashboardData(); // Carrega os dados do dashboard
@@ -376,9 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
         registerEmployeeForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            // LÓGICA FINAL E CORRETA
             if (editingEmployeeId) {
-                // --- MODO DE EDIÇÃO ---
                 const firstName = document.getElementById('newFirstName').value.trim();
                 const roleId = document.getElementById('newRole').value;
 
@@ -486,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Gerenciamento de Cargos ---
 
     const loadRoles = async () => {
-        console.log("1. Iniciando loadRoles para carregar a tabela de cargos."); // Ponto de verificação
+        console.log("1. Iniciando loadRoles para carregar a tabela de cargos.");
         if (!rolesTableBody) {
             console.error("ERRO: Elemento da tabela de cargos (rolesTableBody) não encontrado!");
             return;
@@ -505,10 +495,10 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 if (noRolesMessage) noRolesMessage.classList.add('hidden');
                 
-                console.log(`2. Encontrados ${roles.length} cargos. Criando linhas...`); // Ponto de verificação
+                console.log(`2. Encontrados ${roles.length} cargos. Criando linhas...`); 
 
                 roles.forEach(role => {
-                    const row = rolesTableBody.insertRow(); // Cria uma nova linha na tabela
+                    const row = rolesTableBody.insertRow();
                     row.innerHTML = `
                         <td>${role.id}</td>
                         <td>${role.name}</td>
@@ -522,14 +512,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         </td>
                     `;
 
-                    // --- CORREÇÃO ESSENCIAL AQUI ---
-                    // Adiciona os "ouvintes" de evento aos botões DENTRO da linha que acabamos de criar.
                     const permissionsButton = row.querySelector('.role-permissions');
                     const deleteButton = row.querySelector('.role-delete');
 
                     if (permissionsButton) {
                         permissionsButton.addEventListener('click', () => {
-                            console.log(`4. Botão de permissões clicado para o cargo: ${role.name} (ID: ${role.id})`); // Ponto de verificação
+                            console.log(`4. Botão de permissões clicado para o cargo: ${role.name} (ID: ${role.id})`);
                             openPermissionsModal(role.id, role.name);
                         });
                     }
@@ -539,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             }
-            console.log("3. Tabela de cargos carregada com sucesso."); // Ponto de verificação
+            console.log("3. Tabela de cargos carregada com sucesso.");
         } catch (error) {
             console.error('Erro detalhado em loadRoles:', error);
             alert('Não foi possível carregar a lista de cargos.');
@@ -553,8 +541,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cargoIdForPermissionsInput.value = cargoId;
         permissionsCheckboxesContainer.innerHTML = '<p>Carregando permissões...</p>';
         
-        // --- CORREÇÃO PRINCIPAL AQUI ---
-        // Em vez de mudar o 'display', nós adicionamos a classe '.active'
         permissionsModalOverlay.classList.add('active'); 
 
         try {
@@ -589,17 +575,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- NOVA FUNÇÃO PARA FECHAR O MODAL ---
-    // Adicione esta função junto com a 'openPermissionsModal'
+
     const closePermissionsModal = () => {
         if (permissionsModalOverlay) {
-            // Remove a classe '.active' para esconder o modal com a animação de fade-out
             permissionsModalOverlay.classList.remove('active');
         }
     };
 
-    // --- OUVINTES DE EVENTO PARA FECHAR O MODAL ---
-    // Garanta que estas linhas existam no seu código, após a declaração das funções.
     if (closePermissionsModalBtn) {
         closePermissionsModalBtn.addEventListener('click', closePermissionsModal);
     }
@@ -607,11 +589,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cancelPermissionsBtn.addEventListener('click', closePermissionsModal);
     }
 
-    // Também é uma boa prática fechar o modal se o usuário clicar no fundo escuro
     if (permissionsModalOverlay) {
         permissionsModalOverlay.addEventListener('click', (event) => {
-            // Fecha o modal apenas se o clique foi no próprio overlay (fundo),
-            // e não em um de seus filhos (a janela branca).
             if (event.target === permissionsModalOverlay) {
                 closePermissionsModal();
             }
@@ -619,8 +598,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- FORMULÁRIO DE PERMISSÕES ---
-    // Garanta que, ao salvar, o modal também seja fechado.
     if (permissionsForm) {
         permissionsForm.addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -640,7 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     alert('Permissões atualizadas com sucesso!');
-                    closePermissionsModal(); // <<<--- FECHA O MODAL APÓS SALVAR
+                    closePermissionsModal();
                 } else {
                     const errorData = await response.json();
                     alert(`Erro ao salvar: ${errorData.error || 'Erro desconhecido.'}`);
@@ -1132,12 +1109,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Exibe nome e quantidade atual para ajudar na seleção
                 option.textContent = `${item.name} (Estoque: ${item.quantity} ${item.unit_of_measure})`;
 
-                // --- ALTERAÇÃO PRINCIPAL AQUI ---
-                // Se o item tiver um preço de venda sugerido, armazena-o no atributo 'data-suggested-price'
                 if (item.suggested_sale_price) {
                     option.dataset.suggestedPrice = item.suggested_sale_price;
                 }
-                // --- FIM DA ALTERAÇÃO ---
 
                 menuProductStockItemSelect.appendChild(option);
             });
@@ -1475,20 +1449,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     navItems.forEach(item => {
         item.addEventListener('click', (event) => {
-            // Pega o atributo 'data-section' do link clicado
             const sectionId = event.currentTarget.dataset.section;
 
-            // Se o link tiver o atributo 'data-section', ele é um link interno
-            // da página admin.html.
+
             if (sectionId) {
-                // Impede a navegação padrão para que possamos mostrar a seção com JavaScript.
                 event.preventDefault();
                 showSection(sectionId);
             }
             
-            // Se o link NÃO tiver 'data-section' (como o link para pedidos.html),
-            // o JavaScript não faz nada, permitindo que o navegador siga o 'href'
-            // e vá para a nova página normalmente.
+
         });
     });
 });
